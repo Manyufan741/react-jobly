@@ -19,7 +19,7 @@ const validate = values => {
 
 const Register = () => {
     const history = useHistory();
-    const [errors, setErrors] = useState("");
+    const [errors, setErrors] = useState([]);
     const tokenControl = useContext(tokenContext);
     const formik = useFormik({
         initialValues: {
@@ -35,12 +35,12 @@ const Register = () => {
         onSubmit: async (values) => {
             try {
                 const response = await JoblyApi.register(values);
-                setErrors("");
+                setErrors([]);
                 tokenControl.setToken(response.token);
                 history.push("/");
             }
             catch (e) {
-                // console.log(e);
+                console.log(e);
                 setErrors(e);
             }
         }
